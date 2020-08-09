@@ -48,7 +48,20 @@ Database.then(async (db) => {
         WHERE classes.proffy_id = 1;
     `)
 
-    console.log(selectedClassesAndProffys)
+    //console.log(selectedClassesAndProffys)
 
-    // 
+    // o horário que a pessoa trabalha é das 8h até as 18h
+    // o horario di time_from (8h) precisa ser menor ou igual ao horario solicitado
+    // o time_to precisa ser acima
+
+    const selectedClassesSchedules = await db.all(`
+        SELECT class_schedule.*
+        FROM class_schedule
+        WHERE class_schedule.class_id = 1
+        AND class_schedule.weekday = "0"
+        AND class_schedule.time_from <= "520"
+        AND class_schedule.time_to > "520"
+    `)
+
+    console.log(selectedClassesSchedules)
 })
